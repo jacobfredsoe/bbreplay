@@ -28,17 +28,21 @@ bbreplay(params, function (err, result) {
 
 __Arguments__
 
-`params` - An object with the parameters to be used by the function
-*`replay` - path to the BB2 replay file
-`callback(err, res)` - A callback which is called when the function
-  has finished, or an error occurs.
-*`err` - null if no error occurs during match replay processing, information 
++ `params` - An object with the parameters to be used by the function
+    - `replay` - path to the BB2 replay file.
++ `callback(err, res)` - A callback which is called when the function
+ has finished, or an error occurs.
+    - `err` - null if no error occurs during match replay processing, information 
 about the error otherwise.
-*`res` - object with match data. 
+    - `res` - object with match data.
 
 __Examples__
 
 ```js
+var params = {
+    replay: 'file.bbrz'
+};
+
 bbreplay(params, function (err, result) {
     // results is an object with match data
     console.dir(result);
