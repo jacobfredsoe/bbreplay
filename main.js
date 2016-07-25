@@ -10,12 +10,25 @@ var check = require('./lib/check'),
     bb2Helpers = require('./lib/bb2Helpers');
 
 /**
- * Return Blood Bowl Match result
+ * Return Blood Bowl Match analysis
  * @param {object} param - the parameters of the function
  * @param {requestCallback} next - callback function
  * @return {requestCallback} next
  */
-var getMatchResults = function (param, next) {
+var getMatchData = function (param, next) {
+  try {
+    if (arguments.length !== 2) {
+      throw new Error('function is waiting two arguments');
+    } else {
+      if (typeof arguments[0] !== 'object')
+        throw new Error('first argument should be an object');
+      if (typeof arguments[1] !== 'function')
+        throw new Error('second argument should be a callback function');
+    }
+  }
+  catch (err) {
+    return err;
+  }
   async.series([
     function (cb) {
       check.param(param, function (err) {
@@ -32,7 +45,7 @@ var getMatchResults = function (param, next) {
       });
     },
     function (cb) {
-      bb2Helpers.readReplay(param.replay, function (err, replay) {
+      bb2Helpers(param.replay, function (err, replay) {
         if (err)
           return cb(err);
         cb(null, replay);
@@ -45,6 +58,5 @@ var getMatchResults = function (param, next) {
   });
 };
 
-module.exports = {
-  getMatchResults: getMatchResults
-};
+
+module.exports = getMatchData;
