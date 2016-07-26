@@ -13,7 +13,7 @@ var check = require('./lib/check'),
 /**
  * Return Blood Bowl Match analysis
  * @param {string} file - the path to the replay file
- * @return {requestCallback} next
+ * @return {promise}
  */
 var getBB2replay = function (file) {
   var validArgument = true,
