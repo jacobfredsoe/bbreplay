@@ -11,11 +11,11 @@ var check = require('./lib/check'),
 
 /**
  * Return Blood Bowl Match analysis
- * @param {object} param - the parameters of the function
+ * @param {object} params - the parameters of the function
  * @param {requestCallback} next - callback function
  * @return {requestCallback} next
  */
-var getMatchData = function (param, next) {
+var getMatchData = function (params, next) {
   try {
     if (arguments.length !== 2) {
       throw new Error('function is waiting two arguments');
@@ -31,21 +31,21 @@ var getMatchData = function (param, next) {
   }
   async.series([
     function (cb) {
-      check.param(param, function (err) {
+      check.param(params, function (err) {
         if (err)
           return cb(err);
         cb(null);
       });
     },
     function (cb) {
-      check.fileExist(param.replay, function (err) {
+      check.fileExist(params.replay, function (err) {
         if (err)
           return cb(err);
         cb(null);
       });
     },
     function (cb) {
-      bb2Helpers(param.replay, function (err, replay) {
+      bb2Helpers(params.replay, function (err, replay) {
         if (err)
           return cb(err);
         cb(null, replay);
