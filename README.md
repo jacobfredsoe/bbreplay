@@ -9,27 +9,22 @@ install bbreplay` which will download bbreplay and all dependencies.
 ## Usage
 ```javascript
 var bbreplay = require('bbreplay');
-var params = {
-        replay: 'path to your BB2 replay file'
-    }
+var file = 'path to your BB2 replay file';
 
-bbreplay(params, function (err, result) {
-    console.log(result);
-});
-
+bbreplay.getBB2replay(file)
+    .then(function (result) {
+        console.log(result);
+    })
+    .catch(function (err) {
+        console.log(err);
+    });
 ```  
 
 ## Documentation
-### bbreplay(params, callback)
+### bbreplay.getBB2replay(file)
 
 __Arguments__
-+ `params` - An object with the parameters to be used by the function
-  + `replay` - path to the BB2 replay file.
-+ `callback(err, res)` - A callback which is called when the function
- has finished, or an error occurs.
-  + `err` - null if no error occurs during match replay processing, information 
-about the error otherwise.
-  + `res` - object with match data.
++ `file` - path to the BB2 replay file.
 
 #### Returned object
     {
@@ -66,7 +61,7 @@ about the error otherwise.
         results: {
             match row information
         },
-        bbReplayVersion: version of bbrepplay that genrates the result
+        bbReplayVersion: version of bbrepplay that generates the result
     }  
 
 #### Roll Type
@@ -112,13 +107,16 @@ about the error otherwise.
 
 __Examples__
 ```js
-var params = {
-    replay: 'file.bbrz'
-};
+var file = 'file.bbrz';
 
-bbreplay(params, function (err, result) {
-    // results is an object with match data
-    console.log(result);
+bbreplay.getBB2replay(file)
+    .then(function (result) {
+        // results is an object with match data
+        console.log(result);
+    })
+    .catch(function(err) {
+        console.log(err);
+    });
 });
 ```
 ## Acknowledgments
@@ -127,6 +125,7 @@ Part of the code, especially replay file decoding, is inspired by [bonnici]
 (http://onesandskulls.com/) web site.
 
 ## Versions
+version 0.3.0 : Use promise instead of asynchrone function with callback  
 version 0.2.0 : Code refactoring  
 version 0.1.0 : First implementation of the library with one function 
 'getMatchResults' that returns BB2 match result as json object

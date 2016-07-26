@@ -3,7 +3,8 @@
 'use strict';
 
 // include npm packages
-var async = require('async');
+var async = require('async'),
+    Promise = require('promise');
 
 // include modules libraries
 var check = require('./lib/check'),
@@ -11,52 +12,51 @@ var check = require('./lib/check'),
 
 /**
  * Return Blood Bowl Match analysis
- * @param {object} params - the parameters of the function
- * @param {requestCallback} next - callback function
+ * @param {string} file - the path to the replay file
  * @return {requestCallback} next
  */
-var getMatchData = function (params, next) {
+var getBB2replay = function (file) {
+  var validArgument = true,
+      error;
   try {
-    if (arguments.length !== 2) {
-      throw new Error('function is waiting two arguments');
+    if (arguments.length !== 1) {
+      throw new Error('function is waiting one argument');
     } else {
-      if (typeof arguments[0] !== 'object')
-        throw new Error('first argument should be an object');
-      if (typeof arguments[1] !== 'function')
-        throw new Error('second argument should be a callback function');
+      if (typeof arguments[0] !== 'string')
+      throw new Error('argument should be a path to the BB2 replay file');
     }
   }
   catch (err) {
-    return err;
+    error = err;
+    validArgument = false;
   }
-  async.series([
-    function (cb) {
-      check.param(params, function (err) {
-        if (err)
-          return cb(err);
-        cb(null);
-      });
-    },
-    function (cb) {
-      check.fileExist(params.replay, function (err) {
-        if (err)
-          return cb(err);
-        cb(null);
-      });
-    },
-    function (cb) {
-      bb2Helpers(params.replay, function (err, replay) {
-        if (err)
-          return cb(err);
-        cb(null, replay);
-      });
-    }
-  ], function (err, res) {
-    if (err)
-      return next(err);
-    return next(null, res[2]);
+
+  return new Promise(function (resolve, reject) {
+    if (!validArgument) 
+      reject(error);
+    async.series([
+      function (cb) {
+        check.fileExist(file, function (err) {
+          if (err)
+            return cb(err);
+          cb(null);
+        });
+      },
+      function (cb) {
+        bb2Helpers(file, function (err, replay) {
+          if (err)
+            return cb(err);
+          cb(null, replay);
+        });
+      }
+    ], function (err, res) {
+      if (err)
+        reject(err);
+      resolve(res[1]);
+    });
   });
 };
 
-
-module.exports = getMatchData;
+module.exports = {
+  getBB2replay: getBB2replay
+};
