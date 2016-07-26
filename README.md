@@ -24,12 +24,12 @@ bbreplay(params, function (err, result) {
 
 __Arguments__
 + `params` - An object with the parameters to be used by the function
-    + `replay` - path to the BB2 replay file.
+  + `replay` - path to the BB2 replay file.
 + `callback(err, res)` - A callback which is called when the function
  has finished, or an error occurs.
-    + `err` - null if no error occurs during match replay processing, information 
+  + `err` - null if no error occurs during match replay processing, information 
 about the error otherwise.
-    + `res` - object with match data.
+  + `res` - object with match data.
 
 #### Returned object
     {
