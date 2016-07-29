@@ -29,26 +29,59 @@ __Arguments__
 #### Returned object
     {
         gameDetails: {
-            stadiumName: 'name of the stadium',
+                leagueName: league name,
+                competitionName:  competition name,
+                stadiumName: stadium name,
+                finished: game end date and hour,
             homeTeam: {
-                coachName: 'name of the home team coach',
-                teamName: 'name of the home team',
+                coachName: home team coach name,
+                coachid: home team coach id,
+                teamName: home team name,
                 raceId: home team race id,
-                score: home team TD
+                value: home team TV,
+                popularity: home team popularity,
+                treasury: home team treasury,
+                apothecary: home team apothecary,
+                reroll: home team reroll,
+                logo: home team logo,
+                idteam: home team id
             }
             awayTeam: {
-                coachName: 'name of the away team coach',
-                teamName: 'name of the away team',
+                coachName: away team coach name,
+                coachid: away team coach id,
+                teamName: away team name,
                 raceId: away team race id,
-                score: away team TD
+                value: away team TV,
+                popularity: away team popularity,
+                treasury: away team treasury,
+                apothecary: away team apothecary,
+                reroll: away team reroll,
+                logo: away team logo,
+                idteam: away team id
             }
         },
         playerDetails: { //one line per player
             '1': { // id used in actions
-                id: 1, // id used in actions
-                teamId: 0(home)-1(away),
-                type: 20, //player type
-                name: 'player name' 
+                name: player name,
+                id: player id used in actions,
+                number: player number,
+                ma: player MA,
+                st: player ST,
+                ag: player AG,
+                av: player AV,
+                type: player type id,
+                xp: player XP,
+                skills: array of skill id,
+                casualty: array of casualty id ,
+                stats: { // game player statistics
+                    acquiredxp: acquired experience during the game,
+                    casualty: game casualty,
+                    inflictedtackles: 1, // stats keys depends of player performances
+                    sustainedtackles: 3,
+                    sustainedinjuries: 1,
+                    matchplayed: 1,
+                    idplayerlisting: player id
+                }
             }
         },
         actions: [ // array of actions
@@ -61,7 +94,7 @@ __Arguments__
         results: {
             match row information
         },
-        bbReplayVersion: version of bbrepplay that generates the result
+        bbReplayVersion: version of bbrepplay that generates the data
     }  
 
 #### Roll Type
@@ -125,6 +158,7 @@ Part of the code, especially replay file decoding, is inspired by [bonnici]
 (http://onesandskulls.com/) web site.
 
 ## Versions
+version 0.4.0 : Include team and player statistics in the returned object  
 version 0.3.0 : Use promise instead of asynchrone function with callback  
 version 0.2.0 : Code refactoring  
 version 0.1.0 : First implementation of the library with one function 
