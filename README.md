@@ -29,10 +29,10 @@ __Arguments__
 #### Returned object
     {
         gameDetails: {
-                leagueName: league name,
-                competitionName:  competition name,
-                stadiumName: stadium name,
-                finished: game end date and hour,
+            leagueName: league name,
+            competitionName:  competition name,
+            stadiumName: stadium name,
+            finished: game end date and hour,
             homeTeam: {
                 coachName: home team coach name,
                 coachid: home team coach id,
@@ -62,6 +62,7 @@ __Arguments__
         },
         playerDetails: { //one line per player
             '1': { // id used in actions
+                team: team index, // 0: home, 1:away
                 name: player name,
                 id: player id used in actions,
                 number: player number,
@@ -158,6 +159,7 @@ Part of the code, especially replay file decoding, is inspired by [bonnici]
 (http://onesandskulls.com/) web site.
 
 ## Versions
+version 0.4.1 : Add team info into player object 
 version 0.4.0 : Include team and player statistics in the returned object  
 version 0.3.0 : Use promise instead of asynchrone function with callback  
 version 0.2.0 : Code refactoring  
