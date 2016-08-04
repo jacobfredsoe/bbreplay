@@ -29,6 +29,7 @@ __Arguments__
 #### Returned object
     {
         gameDetails: {
+            fileName: replay file name,
             leagueName: league name,
             competitionName:  competition name,
             stadiumName: stadium name,
@@ -71,6 +72,7 @@ __Arguments__
                 ag: player AG,
                 av: player AV,
                 type: player type id,
+                level: player level,
                 xp: player XP,
                 skills: array of skill id,
                 casualty: array of casualty id ,
@@ -159,6 +161,7 @@ Part of the code, especially replay file decoding, is inspired by [bonnici]
 (http://onesandskulls.com/) web site.
 
 ## Versions
+version 0.4.3 : Add file name    
 version 0.4.2 : Add level into player object  
 version 0.4.1 : Add team info into player object  
 version 0.4.0 : Include team and player statistics in the returned object  
