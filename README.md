@@ -231,6 +231,7 @@ Part of the code, especially replay file decoding, is inspired by [bonnici]
 (http://onesandskulls.com/) web site.
 
 ## Versions
+version 0.4.4 : Modify coachId and teamId  
 version 0.4.3 : Add file name    
 version 0.4.2 : Add level into player object  
 version 0.4.1 : Add team info into player object  
