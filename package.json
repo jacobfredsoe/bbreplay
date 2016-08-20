@@ -1,6 +1,6 @@
 {
   "name": "bbreplay",
-  "version": "0.4.3",
+  "version": "0.4.4",
   "description": "module to read blood bowl replay files",
   "main": "./main",
   "scripts": {
